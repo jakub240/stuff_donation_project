@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from charity.views import Landing_Page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', Landing_Page.as_view(), name='landing-page'),
 ]
