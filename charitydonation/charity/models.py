@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 
 INST_CHOICES = [
     ('FN', 'fundacja'),
@@ -11,6 +11,9 @@ INST_CHOICES = [
 
 class Category(models.Model):
     name = models.CharField(max_length=60)
+    
+    def __str__(self):
+        return self.name
 
 
 class Institution(models.Model):
@@ -18,6 +21,9 @@ class Institution(models.Model):
     description = models.TextField()
     type = models.CharField(max_length=2, choices=INST_CHOICES, default='FN')
     categories = models.ManyToManyField(Category)
+   
+    def __str__(self):
+        return self.name
 
 
 class Donation(models.Model):
@@ -32,3 +38,6 @@ class Donation(models.Model):
     pick_up_time = models.TimeField(auto_now_add=True)
     pick_up_comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.address
