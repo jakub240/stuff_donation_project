@@ -21,9 +21,6 @@ from charity.views import LandingPage, Register, AddDonation
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/login/', auth_views.LoginView.as_view(), redirect_field_name='landing-page', name='login'),
-    # path('login/', LoginView.as_view(), name='login'),
-    # path('logout/', LogoutView.as_view(), name='logout'),
     path('', LandingPage.as_view(), name='landing-page'),
     path('register/', Register.as_view(), name='register'),
     path('add-donation/', AddDonation.as_view(), name='add-donation'),

@@ -11,14 +11,14 @@
   <body>
     <header class="header--main-page">
       <nav class="container container--70">
-          {% if not request.user.is_authenticated %}
+          {% if not user.is_authenticated %}
         <ul class="nav--actions">
           <li><a href="{% url 'login' %}" class="btn btn--small btn--without-border">Zaloguj</a></li>
           <a id='register' href="{% url 'register' %}" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
           {% else %}
           <ul class="nav--actions">
-              <li><a class="btn btn--small btn--without-border">Witaj {{ request.user.username }}</a></li>
+              <li><a class="btn btn--small btn--without-border">Witaj {{ user.username }}</a></li>
               <li><a class="btn btn--small btn--without-border">Profil</a></li>
               <li><a class="btn btn--small btn--without-border">Ustawienia</a></li>
               <li>

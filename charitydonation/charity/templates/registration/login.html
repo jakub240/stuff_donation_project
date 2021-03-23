@@ -3,10 +3,9 @@
     {% block title  %}
         {%  load static  %}
     <section class="login-page">
-            {{ msg }}
           <form class='form-group' action="" method="POST">
             {% csrf_token %}
-            {{form.as_ul}}
+            {{form}}
             <input type="submit" />
           </form>
         <div>
