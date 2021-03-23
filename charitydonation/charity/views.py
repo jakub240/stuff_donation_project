@@ -1,33 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
+from django.urls import reverse_lazy
 from .models import Category, Institution, Donation
 from django.db.models import Sum
+from .func.landing_page import dyna_stats, institution
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 
+# class LoginView(View):
+#     def get(self, request):
+#
+#         return render(request, 'registration/login.html')
+#
+#     def post(self, request):
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             next_url = request.GET.get('next')
+#             return redirect(next_url or 'landing-page')
+#         return redirect('register')
+#
+#
+# class LogoutView(View):
+#     def get(self, request):
+#         logout(request)
+#         return redirect('landing-page')
 
-class Landing_Page(View):
+
+class LandingPage(View):
     def get(self, request):
-        
-        works = Donation.objects.all()
-        works_sum = works.aggregate(Sum('quantity'))['quantity__sum']
-        institutions = Institution.objects.all()
-        inst_in_dnt_lst = []        
+        dyna_stats()
+        institution()
 
-        if works:
-            for dnt in works:
-                inst_in_dnt = dnt.institution
-                inst_in_dnt_lst.append(inst_in_dnt)            
-                        
-            inst_set = set(inst_in_dnt_lst)
-            inst_lst = list(inst_set)
-            inst_count = len(inst_lst)         
-
-        context = {
-            'works_sum': works_sum,
-            'inst_count': inst_count,
-        }
-
-        return render(request, 'index.html', context)
+        return render(request, 'index.html', institution() and dyna_stats())
 
 
 class Register(View):

@@ -2,12 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 INST_CHOICES = [
     ('FN', 'fundacja'),
     ('OP', 'organizacja pozarządowa'),
     ('ZL', 'zbiórka lokalna')
       ]
+
 
 class Category(models.Model):
     name = models.CharField(max_length=60)
