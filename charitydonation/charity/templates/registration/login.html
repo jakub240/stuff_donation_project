@@ -1,16 +1,22 @@
 {% extends "base.html" %}
-    
+
     {% block title  %}
         {%  load static  %}
+        <h2>
+        Zaloguj się
+        </h2>
+    {% endblock  %}
+    {% block content %}
+    {% load static %}
     <section class="login-page">
-          <form class='form-group' action="" method="POST">
-            {% csrf_token %}
-            {{form}}
-            <input type="submit" />
-          </form>
-        <div>
-            <a href="{% url 'register' %}">Załóż konto</a>
-        </div>
+      <form class='form-group' action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input class="btn" type="submit" name="Zaloguj się" />
+      </form>
+    <div>
+        <a href="{% url 'register' %}">Załóż konto</a>
+    </div>
     </section>
     {% endblock %}
 

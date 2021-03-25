@@ -6,6 +6,8 @@ from .func.landing_page import dyna_stats, institution
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import DonationForm
 
 
 class LandingPage(View):
@@ -22,9 +24,17 @@ class Register(View):
         return render(request, 'register.html')
 
 
-class AddDonation(View):
+class AddDonation(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+
     def get(self, request):
-        return render(request, 'form.html')
+        form = DonationForm
+        categories = Category.objects.all()
+        context = {
+            'form': form,
+            'categories': categories
+        }
+        return render(request, 'form.html', context)
 
 
 
