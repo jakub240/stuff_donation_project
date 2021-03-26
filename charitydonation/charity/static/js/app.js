@@ -252,4 +252,12 @@ document.addEventListener("DOMContentLoaded", function() {
   if (form !== null) {
     new FormSteps(form);
   }
+  
+  const inst = document.querySelector("#inst");
+  const ctg =document.querySelector("#ctg");
+  if (ctg.state !== 'active' && !(ctg in inst)) {
+    inst.style.visibility = 'hidden'
+
+  }
+
 });

@@ -61,14 +61,14 @@
 
             {%  for ctg in categories %}
             <div class="form-group form-group--checkbox">
-              <label>
+              <label id="ctg">
                 <input
                   type="checkbox"
                   name="categories"
                   value= {{ form.category.pk }}
                 />
                 <span class="checkbox"></span>
-                <span class="description">{{ form.category }}</span>
+                <span class="description">{{ ctg.name }}</span>
               </label>
             </div>
               {% endfor %}
@@ -80,12 +80,16 @@
 
           <!-- STEP 2 -->
           <div data-step="2">
-            <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
+            <h3>Podaj liczbę  worków, w które spakowałeś/aś rzeczy:</h3>
 
             <div class="form-group form-group--inline">
               <label>
-                Liczba 60l worków:
-                <input type="number" name="bags" step="1" min="1" />
+                Liczba  worków:
+                <input
+                    type="number"
+                    name="bags"
+                    value= {{ form.quantity }}
+                />
               </label>
             </div>
 
@@ -101,33 +105,21 @@
           <div data-step="3">
             <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="radio" name="organization" value="old" />
-                <span class="checkbox radio"></span>
-                <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
-                  </div>
-                </span>
-              </label>
-            </div>
+              {% for inst in institutions %}
 
             <div class="form-group form-group--checkbox">
               <label>
-                <input type="radio" name="organization" value="old" />
+                <input id="inst" type="radio" name="organization" value={{ form.institution.pk }} />
                 <span class="checkbox radio"></span>
                 <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
+                  <div class="title">{{ inst.name }}</div>
                   <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
+                    {{ inst.description }}
                   </div>
                 </span>
               </label>
             </div>
+              {%  endfor %}
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>
@@ -143,22 +135,30 @@
               <div class="form-section--column">
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
-                  <label> Ulica <input type="text" name="address" /> </label>
+                  <label> Ulica <input type="text" name="address"
+                  value={{ form.address }}
+                  /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Miasto <input type="text" name="city" /> </label>
+                  <label> Miasto <input type="text" name="city"
+                  value= {{ form.city }}
+                  /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
-                    Kod pocztowy <input type="text" name="postcode" />
+                    Kod pocztowy <input type="text" name="postcode"
+                  value= {{ form.zip_code }}
+                  />
                   </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
-                    Numer telefonu <input type="phone" name="phone" />
+                    Numer telefonu <input type="phone" name="phone"
+                  value= {{ form.phone_number }}
+                  />
                   </label>
                 </div>
               </div>
@@ -166,17 +166,23 @@
               <div class="form-section--column">
                 <h4>Termin odbioru</h4>
                 <div class="form-group form-group--inline">
-                  <label> Data <input type="date" name="data" /> </label>
+                  <label> Data <input type="date" name="data"
+                  value= {{ form.pick_up_date }}
+                  /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Godzina <input type="time" name="time" /> </label>
+                  <label> Godzina <input type="time" name="time"
+                  value= {{ form.pick_up_time }}
+                  /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Uwagi dla kuriera
-                    <textarea name="more_info" rows="5"></textarea>
+                    <textarea name="more_info" rows="5"
+                    value= {{ form.pick_up_comment }}
+                    ></textarea>
                   </label>
                 </div>
               </div>

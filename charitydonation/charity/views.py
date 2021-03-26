@@ -30,11 +30,31 @@ class AddDonation(LoginRequiredMixin, View):
     def get(self, request):
         form = DonationForm
         categories = Category.objects.all()
+        institutions = Institution.objects.all()
         context = {
             'form': form,
-            'categories': categories
+            'categories': categories,
+            'institutions': institutions,
         }
         return render(request, 'form.html', context)
+
+    def post(self, request):
+        form = DonationForm(request.POST)
+        user = request.user
+        if form.is_valid():
+            Donation.objects.create(
+                quantity=form.cleaned_data['quantity'],
+                categories=form.cleaned_data['category'],
+                institution=form.cleaned_data['institution'],
+                address=form.cleaned_data['address'],
+                phone_number=form.cleaned_data['phone_number'],
+                city=form.cleaned_data['city'],
+                zip_code=form.cleaned_data['zip_code'],
+                pick_up_date=form.cleaned_data['pick_up_date'],
+                pick_up_time=form.cleaned_data['pick_up_time'],
+                pick_up_comment=form.cleaned_data['pick_up_comment'],
+                user=user
+            )
 
 
 
