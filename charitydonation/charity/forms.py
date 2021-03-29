@@ -13,11 +13,11 @@ class DonationForm(forms.Form):
     quantity = forms.IntegerField(min_value=1, validators=[number_validator])
     institution = forms.ModelChoiceField(queryset=Institution.objects)
     address = forms.CharField(max_length=60)
-    phone_number = forms.IntegerField
+    phone_number = forms.IntegerField()
     city = forms.CharField(max_length=30)
     zip_code = forms.IntegerField()
     pick_up_date = forms.DateField()
     pick_up_time = forms.TimeField()
-    pick_up_comment = forms.TextInput()
+    pick_up_comment = forms.CharField(max_length=200)
 
 
