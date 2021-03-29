@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import DonationForm
+from .forms import DonationForm, RegisterForm
+from django.views.generic.edit import FormView
 
 
 class LandingPage(View):
@@ -19,9 +20,16 @@ class LandingPage(View):
         return render(request, 'index.html', dyna_stats_result)
 
 
-class Register(View):
-    def get(self, request):
-        return render(request, 'register.html')
+class Register(FormView):
+    form_class = RegisterForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        return super().form_valid(form)
 
 
 class AddDonation(LoginRequiredMixin, View):
