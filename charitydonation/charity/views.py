@@ -55,7 +55,10 @@ class AddDonation(LoginRequiredMixin, View):
                 pick_up_comment=form.cleaned_data['pick_up_comment'],
                 user=user
             )
+            return redirect('form-confirmation')
 
 
 
-
+class FormCorfirmation(View):
+    def get(self, request):
+        return render('form-confirmation.html')
