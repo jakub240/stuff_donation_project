@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Category, Institution, Donation
 from .func.landing_page import dyna_stats, institution
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import LoginView, LogoutView
+# from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import DonationForm, RegisterForm
+from django.contrib import messages
+from .forms import RegisterForm, DonationForm
 from django.views.generic.edit import FormView
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class LandingPage(View):
@@ -18,6 +20,27 @@ class LandingPage(View):
         dyna_stats_result.update(inst_result)
 
         return render(request, 'index.html', dyna_stats_result)
+
+
+# class LoginView(View):
+#     def get(self, request):
+#         form = AuthenticationForm()
+#         return render(request, 'registration/login.html', {'form': form})
+#
+#     def post(self, request):
+#         form = AuthenticationForm(request.POST)
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(username=username, password=password)
+#         if user:
+#             if user.is_active:
+#                 login(request, user)
+#                 return redirect(reverse('landing-page'))
+#             else:
+#                 return redirect('register')
+#         else:
+#             messages.error(request, 'username or password not correct')
+#             return reverse_lazy('register')
 
 
 class Register(FormView):
@@ -66,7 +89,6 @@ class AddDonation(LoginRequiredMixin, View):
             return redirect('form-confirmation')
 
 
-
-class FormCorfirmation(View):
+class FormConfirmation(View):
     def get(self, request):
         return render('form-confirmation.html')
