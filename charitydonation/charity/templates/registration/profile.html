@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+    {% block title  %}
+        {%  load static  %}
+        <h2>
+        Twój profil
+        </h2>
+    {% endblock  %}
+    {% block content %}
+    {% load static %}
+    <section class="login-page">
+
+        <div class="form-group">
+            <h1>Imię : {{ user.first_name }}</h1>
+            <h1>Nazwisko : {{ user.last_name }}</h1>
+            <h1>Adres email : {{ user.email }}</h1>
+        </div>
+
+    </section>
+    {% endblock %}

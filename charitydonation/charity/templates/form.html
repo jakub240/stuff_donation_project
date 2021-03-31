@@ -84,15 +84,8 @@
             <h3>Podaj liczbę  worków, w które spakowałeś/aś rzeczy:</h3>
 
             <div class="form-group form-group--inline">
-              <label>
-                Liczba  worków:
-                <input
-                    type="number"
-                    name="quantity"
-                    value="{{ form.quantity }}"
-                />
-                  <span class="checkbox"></span>
-              </label>
+              <label> Liczba  worków: </label> {{ form.quantity }}
+
             </div>
 
             <div class="form-group form-group--buttons">
@@ -136,59 +129,40 @@
             <div class="form-section form-section--columns">
               <div class="form-section--column">
                 <h4>Adres odbioru</h4>
+
                 <div class="form-group form-group--inline">
-                  <label> Ulica <input type="text" name="address"
-                  value="{{ form.address }}"
-                  />
-                  </label>
+                  <label> Adres </label> {{ form.address }}
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Miasto <input type="text" name="city"
-                  value= "{{ form.city }}"
-                  />
-                  </label>
+                  <label> Miasto </label> {{ form.city }}
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label>
-                    Kod pocztowy <input type="text" name="zip_code"
-                  value= "{{ form.zip_code }}"
-                  />
-                  </label>
+                  <label> Kod pocztowy </label> {{ form.zip_code}}
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label>
-                    Numer telefonu <input type="phone" name="phone_number"
-                  value= "{{ form.phone_number }}"
-                  />
-                  </label>
+                  <label> Numer telefonu </label> {{ form.phone_number }}
                 </div>
+
               </div>
 
               <div class="form-section--column">
                 <h4>Termin odbioru</h4>
+
                 <div class="form-group form-group--inline">
-                  <label> Data <input type="date" name="pick_up_date"
-                  value= "{{ form.pick_up_date }}"
-                  /> </label>
+                  <label> Data </label> {{ form.pick_up_date }}
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Godzina <input type="time" name="pick_up_time"
-                  value= "{{ form.pick_up_time }}"
-                  /> </label>
+                  <label> Godzina </label> {{ form.pick_up_time }}
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label>
-                    Uwagi dla kuriera
-                    <textarea name="pick_up_comment" rows="5"
-                    value= "{{ form.pick_up_comment }}"
-                    ></textarea>
-                  </label>
+                  <label> Uwagi dla kuriera </label> {{ form.pick_up_comment}}
                 </div>
+
               </div>
             </div>
             <div class="form-group form-group--buttons">

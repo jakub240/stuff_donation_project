@@ -16,8 +16,8 @@ class DonationForm(forms.Form):
     phone_number = forms.IntegerField()
     city = forms.CharField(max_length=30)
     zip_code = forms.IntegerField()
-    pick_up_date = forms.DateField()
-    pick_up_time = forms.TimeField()
+    pick_up_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
+    pick_up_time = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}))
     pick_up_comment = forms.CharField(max_length=200)
 
 
