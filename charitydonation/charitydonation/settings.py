@@ -126,3 +126,4 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'landing-page'
 
 LOGOUT_REDIRECT_URL = 'landing-page'
+

@@ -21,6 +21,11 @@ class DonationForm(forms.Form):
     pick_up_comment = forms.CharField(max_length=200)
 
 
+class NewLoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User

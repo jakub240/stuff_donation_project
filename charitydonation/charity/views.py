@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import RegisterForm, DonationForm
+from .forms import RegisterForm, DonationForm, NewLoginForm
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -22,25 +22,24 @@ class LandingPage(View):
         return render(request, 'index.html', dyna_stats_result)
 
 
-class NewLoginView(View):
+class CustomLogin(View):
     def get(self, request):
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form': form})
+        form = NewLoginForm()
+        return render(request, 'login.html', {'form': form})
 
     def post(self, request):
-        form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                return redirect(reverse('landing-page'))
-            else:
+        form = NewLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is None:
                 return redirect('register')
-        else:
-            messages.error(request, 'username or password not correct')
-            return reverse_lazy('register')
+            else:
+                login(request, user=user)
+                return redirect('landing-page')
+
+        return render(request, 'login.html', {'form': form})
 
 
 class Register(FormView):
