@@ -8,8 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import RegisterForm, DonationForm, NewLoginForm
-from django.views.generic.edit import FormView
+from .forms import RegisterForm, DonationForm, NewLoginForm, UserSettingsForm
+from django.views.generic.edit import FormView, UpdateView
 from django.contrib.auth.forms import AuthenticationForm
 
 
@@ -55,7 +55,7 @@ class Register(FormView):
 
 
 class AddDonation(LoginRequiredMixin, View):
-    login_url = '/accounts/login/'
+    login_url = '/login/'
 
     def get(self, request):
         form = DonationForm
@@ -100,3 +100,10 @@ class UserProfile(View):
             'user': user,
         }
         return render(request, 'registration/profile.html', context)
+
+
+class UserSettings(UpdateView):
+    model = User
+    fields = ['username', 'first_name', 'last_name', 'email']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('landing-page')

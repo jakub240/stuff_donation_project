@@ -18,7 +18,7 @@ class DonationForm(forms.Form):
     zip_code = forms.IntegerField()
     pick_up_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     pick_up_time = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}))
-    pick_up_comment = forms.CharField(max_length=200)
+    pick_up_comment = forms.CharField(max_length=200, widget=forms.Textarea)
 
 
 class NewLoginForm(forms.Form):
@@ -50,3 +50,13 @@ class RegisterForm(forms.ModelForm):
             msg = "Upewnij się że hasła są takie same!"
             self.add_error('password', msg)
             self.add_error('repeat_password', msg)
+
+
+class UserSettingsForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username',
+                  'first_name',
+                  'last_name',
+                  'email',
+                  ]

@@ -221,8 +221,20 @@ document.addEventListener("DOMContentLoaded", function() {
     updateForm() {
       this.$step.innerText = this.currentStep;
 
-      // TODO: Validation
-
+        // // TODO: Validation
+        // // Exit the function if any field in the current tab is invalid:
+        // var x, y, i, valid = true;
+        // x = form.querySelectorAll('#step')
+        // y = x[this.currentStep].getElementsByTagName("input");
+        // for (i = 0; i < x.length; i++) {
+        //   // If a field is empty...
+        //   if (x[i].value == "") {
+        //     // add an "invalid" class to the field:
+        //     x[i].className += " invalid";
+        //     // and set the current valid status to false
+        //     valid = false;
+        //   }
+        // }
       this.slides.forEach(slide => {
         slide.classList.remove("active");
 
@@ -231,8 +243,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
 
-      this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 6;
-      this.$step.parentElement.hidden = this.currentStep >= 6;
+      this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
+      this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
     }
@@ -242,10 +254,11 @@ document.addEventListener("DOMContentLoaded", function() {
      *
      * TODO: validation, send data to server
      */
-    submit(e) {
-      e.preventDefault();
-      this.currentStep++;
-      this.updateForm();
+    submit() {
+        this.updateForm();
+      	if (this.currentStep == 5) {
+		$('button').html('Submit');
+	}
     }
   }
   const form = document.querySelector(".form--steps");
@@ -253,11 +266,11 @@ document.addEventListener("DOMContentLoaded", function() {
     new FormSteps(form);
   }
   
-  const inst = document.querySelector("#inst");
-  const ctg =document.querySelector("#ctg");
-  if (ctg.state !== 'active' && !(ctg in inst)) {
-    inst.style.visibility = 'hidden'
-
-  }
+  // const inst = document.querySelector("#inst");
+  // const ctg =document.querySelector("#ctg");
+  // if (ctg.state !== 'active' && !(ctg in inst)) {
+  //   inst.style.visibility = 'hidden'
+  //
+  // }
 
 });

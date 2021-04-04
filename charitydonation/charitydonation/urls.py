@@ -16,15 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from charity.views import LandingPage, Register, AddDonation, FormConfirmation, UserProfile, CustomLogin
+from charity.views import (
+                        LandingPage,
+                        Register,
+                        AddDonation,
+                        FormConfirmation,
+                        UserProfile,
+                        CustomLogin,
+                        UserSettings,
+                        )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/password_change/done/', auth_views.PasswordChangeDoneView.as_view(
+                    template_name='password_change_done.html'), name='change-password-done'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', CustomLogin.as_view(), name='login'),
+    path('password_change/', auth_views.PasswordChangeView.as_view(
+                    template_name='password_change.html'), name='change-password'),
     path('', LandingPage.as_view(), name='landing-page'),
     path('register/', Register.as_view(), name='register'),
     path('add-donation/', AddDonation.as_view(), name='add-donation'),
     path('confirmation/', FormConfirmation.as_view(), name='form-confirmation'),
     path('profile/', UserProfile.as_view(), name='profile'),
+    path('settings/<int:pk>/', UserSettings.as_view(), name='settings'),
 ]
