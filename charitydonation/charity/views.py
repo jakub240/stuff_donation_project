@@ -96,8 +96,10 @@ class FormConfirmation(View):
 class UserProfile(View):
     def get(self, request):
         user = request.user
+        user_donations = Donation.objects.filter(user=user)
         context = {
             'user': user,
+            'donations': user_donations,
         }
         return render(request, 'registration/profile.html', context)
 

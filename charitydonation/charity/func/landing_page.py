@@ -1,4 +1,4 @@
-from ..models import Category, Institution, Donation
+from ..models import Category, Institution, Donation, User
 from django.db.models import Sum
 
 

@@ -16,5 +16,29 @@
             <h1>Adres email : {{ user.email }}</h1>
         </div>
 
+        <div>
+            <h1> Twoje darowizny :</h1>
+        <table style="width:100%">
+            <tr>
+                <th>Ilość worków</th>
+                <th>Nazwa instytucji</th>
+                <th>Kategoria</th>
+                <th>Data odbioru</th>
+            </tr>
+            {% for dnt in donations %}
+            <tr>
+                <th>{{ dnt.quantity }}</th>
+                <th>{{ dnt.institution }}</th>
+                 <th>{{ dnt.categories }}</th>
+                 <th>{{ dnt.pick_up_date }}</th>
+            </tr>
+        </table>
+                {%  empty %}
+                <p> Nie przekazałeś jeszcze żadnych darowizn:
+                <br> Przekaż darowiznę <a href="{% url 'add-donation' %}">tutaj</a>
+                </p>
+            {% endfor %}
+        </div>
+
     </section>
     {% endblock %}
