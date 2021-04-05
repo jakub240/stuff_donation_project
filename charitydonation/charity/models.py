@@ -38,6 +38,7 @@ class Donation(models.Model):
     pick_up_time = models.TimeField(auto_now_add=True)
     pick_up_comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    is_taken = models.BooleanField(default=False)
 
     def __str__(self):
         return self.address

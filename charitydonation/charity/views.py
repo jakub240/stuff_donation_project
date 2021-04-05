@@ -96,7 +96,7 @@ class FormConfirmation(View):
 class UserProfile(View):
     def get(self, request):
         user = request.user
-        user_donations = Donation.objects.filter(user=user)
+        user_donations = Donation.objects.filter(user=user).order_by('is_taken')
         context = {
             'user': user,
             'donations': user_donations,

@@ -16,16 +16,17 @@
         </div>
 
         <div class="donation-list">
-            <h1 style="margin: 20px"> Twoje darowizny :</h1>
+            <h2 style="margin: 20px"> Twoje darowizny</h2>
         <table style="width: 100%">
             <tr>
                 <th><h1>Ilość worków</h1></th>
                 <th><h1>Nazwa instytucji</h1></th>
                 <th><h1>Kategoria</h1></th>
                 <th><h1>Data odbioru</h1></th>
+                <th><h1>Zabrano</h1></th>
             </tr>
             {% for dnt in donations %}
-            <tr style="background-color: #f9c910">
+            <tr id="donation" style="background-color: #f9c910">
                 <td style="text-align: center; height: 60px; border: 1px solid black">
                     <h3>{{ dnt.quantity }}</h3>
                 </td>
@@ -38,13 +39,19 @@
                  <td style="text-align: center; height: 60px; border: 1px solid black">
                      <h3>{{ dnt.pick_up_date }}</h3>
                  </td>
+                 <td style="text-align: center; height: 60px; border: 1px solid black">
+                     <btn id="is_taken" class="btn">
+                     {{ dnt.is_taken }}
+                     </btn>
+                 </td>
             </tr>
-        </table>
+
                 {%  empty %}
                 <h2> Nie przekazałeś jeszcze żadnych darowizn:
                 <br> Przekaż darowiznę <a href="{% url 'add-donation' %}" style="color: lightblue">tutaj</a>
                 </h2>
             {% endfor %}
+        </table>
         </div>
 
     </section>

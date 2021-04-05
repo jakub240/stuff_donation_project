@@ -273,4 +273,14 @@ document.addEventListener("DOMContentLoaded", function() {
   //
   // }
 
+  /**
+   Switching donation.is_taken to True
+   */
+
+    const donation_row = document.querySelector("#donation");
+    const btn_is_taken = document.querySelector("#is_taken");
+    btn_is_taken.addEventListener("click", function(e) {
+      donation_row.style.backgroundColor = 'grey';
+    });
+
 });
