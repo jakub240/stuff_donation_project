@@ -1,42 +1,49 @@
 {% extends "base.html" %}
 
     {% block title  %}
-        {%  load static  %}
         <h2>
         Twój profil
         </h2>
     {% endblock  %}
     {% block content %}
     {% load static %}
-    <section class="login-page">
+    <section>
 
-        <div class="form-group">
+        <div style="margin: 40px">
             <h1>Imię : {{ user.first_name }}</h1>
             <h1>Nazwisko : {{ user.last_name }}</h1>
             <h1>Adres email : {{ user.email }}</h1>
         </div>
 
-        <div>
-            <h1> Twoje darowizny :</h1>
-        <table style="width:100%">
+        <div class="donation-list">
+            <h1 style="margin: 20px"> Twoje darowizny :</h1>
+        <table style="width: 100%">
             <tr>
-                <th>Ilość worków</th>
-                <th>Nazwa instytucji</th>
-                <th>Kategoria</th>
-                <th>Data odbioru</th>
+                <th><h1>Ilość worków</h1></th>
+                <th><h1>Nazwa instytucji</h1></th>
+                <th><h1>Kategoria</h1></th>
+                <th><h1>Data odbioru</h1></th>
             </tr>
             {% for dnt in donations %}
-            <tr>
-                <th>{{ dnt.quantity }}</th>
-                <th>{{ dnt.institution }}</th>
-                 <th>{{ dnt.categories }}</th>
-                 <th>{{ dnt.pick_up_date }}</th>
+            <tr style="background-color: #f9c910">
+                <td style="text-align: center; height: 60px; border: 1px solid black">
+                    <h3>{{ dnt.quantity }}</h3>
+                </td>
+                <td style="text-align: center; height: 60px; border: 1px solid black">
+                    <h3>{{ dnt.institution }}</h3>
+                </td>
+                 <td style="text-align: center; height: 60px; border: 1px solid black">
+                     <h3>{{ dnt.categories }}</h3>
+                 </td>
+                 <td style="text-align: center; height: 60px; border: 1px solid black">
+                     <h3>{{ dnt.pick_up_date }}</h3>
+                 </td>
             </tr>
         </table>
                 {%  empty %}
-                <p> Nie przekazałeś jeszcze żadnych darowizn:
-                <br> Przekaż darowiznę <a href="{% url 'add-donation' %}">tutaj</a>
-                </p>
+                <h2> Nie przekazałeś jeszcze żadnych darowizn:
+                <br> Przekaż darowiznę <a href="{% url 'add-donation' %}" style="color: lightblue">tutaj</a>
+                </h2>
             {% endfor %}
         </div>
 
